@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'main.dart';
 import 'GamesPage.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   List<String> sportsList = [
     "Soccer",
     "Basketball",
@@ -16,11 +16,6 @@ class HomePage extends StatefulWidget {
     "Golf"
   ];
 
-  @override
-  _HomePageState createState() => _HomePageState(sportsList);
-}
-
-class _HomePageState extends State<HomePage> {
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
   int homePageIndex = 0;
 
@@ -30,8 +25,7 @@ class _HomePageState extends State<HomePage> {
   var gamesPage;
   var homePageOptions;
 
-
-  _HomePageState(List<String> sportsList) {
+  HomePage() {
     sportsListTitle = [
       Padding(
           padding: EdgeInsets.fromLTRB(0, 20.0, 0, 10.0),
@@ -44,18 +38,28 @@ class _HomePageState extends State<HomePage> {
         color: gold,
       )
     ];
+//    gamesPage = GamesPage();
 
+//    homePageOptions = [sportsPage, gamesPage];
+  }
+
+  @override
+  Widget build(BuildContext context) {
     sportsListObjects = sportsList
         .map(
           (word) => Padding(
                 padding: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 15.0),
                 child: OutlineButton(
                   onPressed: () {
-                    setState(() {
-                      gamesPage.setSport(word);
-                      homePageIndex = 1;
-                    });
+//                    setState(() {
+//                      gamesPage.setSport(word);
+//                      homePageIndex = 1;
+//                    });
                     print(word);
+                    Navigator.push(
+                        context,
+                        new MaterialPageRoute(
+                            builder: (ctxt) => GamesPage(word)));
                   },
                   padding: EdgeInsets.fromLTRB(20.0, 10.0, 10.0, 10.0),
                   borderSide: BorderSide(color: lightblue, width: 2.0),
@@ -94,16 +98,6 @@ class _HomePageState extends State<HomePage> {
           ]),
       ),
     );
-
-    gamesPage = GamesPage();
-
-    homePageOptions = [sportsPage, gamesPage];
-
-  }
-
-  @override
-  Widget build(BuildContext context) {
-
     return Scaffold(
       body: Center(
         child: Container(
@@ -117,7 +111,7 @@ class _HomePageState extends State<HomePage> {
 //              ],
 //            ),
 //          ),
-          child: homePageOptions[homePageIndex],
+          child: sportsPage,
         ),
       ),
     );
