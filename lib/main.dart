@@ -10,6 +10,11 @@ Color darkblue = Color(0xff241d4e);
 Color lightblue = Color(0xff6ed5fe);
 Color gold = Color(0xfffece2b);
 
+Color primary = ghostwhite;
+Color contrast = darkblue;
+Color common = lightblue;
+Color highlight = gold;
+
 String input1Value = '';
 String input2Value = '';
 
@@ -25,7 +30,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Homepage',
       theme: ThemeData(
-        primaryColor: lightblue,
+        primaryColor: common,
       ),
       home: fullPage,
     );
@@ -44,7 +49,7 @@ class _FullPageState extends State<FullPage> {
   int _pageIndex = 0;
   var _pageOptions = [loginPage, appPage];
 
-  _FullPageState(){
+  _FullPageState() {
     fullPageState = this;
   }
 

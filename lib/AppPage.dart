@@ -51,9 +51,9 @@ class _AppPageState extends State<AppPage> {
               appCurrentIndex = newtab;
             });
           },
-          backgroundColor: darkblue,
-          selectedItemColor: lightblue,
-          unselectedItemColor: ghostwhite,
+          backgroundColor: contrast,
+          selectedItemColor: common,
+          unselectedItemColor: primary,
           type: BottomNavigationBarType.fixed,
           currentIndex: appCurrentIndex,
           items: [

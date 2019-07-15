@@ -52,8 +52,8 @@ class _HomePageState extends State<HomePage> {
                     });
                     print(word);
                   },
-                  padding: EdgeInsets.fromLTRB(20.0, 10.0, 10.0, 10.0),
-                  borderSide: BorderSide(color: lightblue, width: 2.0),
+//                  padding: EdgeInsets.fromLTRB(20.0, 10.0, 10.0, 10.0),
+                  borderSide: BorderSide(color: common, width: 2.0),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -61,14 +61,14 @@ class _HomePageState extends State<HomePage> {
                           word,
                           style: TextStyle(
                               fontSize: 17.0,
-                              color: darkblue,
+                              color: contrast,
                               fontFamily: 'Montserrat'),
                         ),
                         Icon(Icons.arrow_forward_ios)
                       ]),
                   shape: new RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(10.0)),
-                  color: ghostwhite,
+                  color: primary,
                 ),
               ),
         )
@@ -82,12 +82,12 @@ class _HomePageState extends State<HomePage> {
           )),
       Container(
         height: 2.0,
-        color: gold,
+        color: highlight,
       )
     ];
 
     sportsPage = Padding(
-      padding: const EdgeInsets.fromLTRB(36.0, 10.0, 36.0, 10.0),
+      padding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -111,7 +111,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: Center(
         child: Container(
-          color: ghostwhite,
+          color: primary,
 //          decoration: const BoxDecoration(
 //            gradient: LinearGradient(
 //              colors: <Color>[

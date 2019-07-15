@@ -46,7 +46,7 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: Container(
-          color: ghostwhite,
+          color: primary,
           child: Padding(
 //            padding: const EdgeInsets.all(36.0),
             padding: const EdgeInsets.fromLTRB(36.0, 10.0, 36.0, 10.0),
@@ -85,7 +85,7 @@ class LoginPage extends StatelessWidget {
                       style: TextStyle(fontSize: 20.0),
                     ),
                   ),
-                  color: lightblue,
+                  color: common,
                 ),
               ],
             ),
