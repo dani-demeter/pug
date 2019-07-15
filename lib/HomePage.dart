@@ -3,7 +3,22 @@ import 'package:flutter/material.dart';
 import 'main.dart';
 import 'GamesPage.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  _HomePageState myState;
+
+  _HomePageState getState() {
+    return myState;
+  }
+
+  @override
+  _HomePageState createState() {
+    myState = _HomePageState();
+    return myState;
+  }
+}
+
+class _HomePageState extends State<HomePage> {
+  TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
   List<String> sportsList = [
     "Soccer",
     "Basketball",
@@ -15,17 +30,14 @@ class HomePage extends StatelessWidget {
     "Rugby",
     "Golf"
   ];
-
-  TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
-  int homePageIndex = 0;
-
   var sportsListTitle;
   var sportsListObjects;
   var sportsPage;
-  var gamesPage;
-  var homePageOptions;
 
-  HomePage() {
+//  var gamesPage;
+//  var homePageOptions;
+
+  _HomePageState() {
     sportsListTitle = [
       Padding(
           padding: EdgeInsets.fromLTRB(0, 20.0, 0, 10.0),
@@ -38,6 +50,7 @@ class HomePage extends StatelessWidget {
         color: gold,
       )
     ];
+
 //    gamesPage = GamesPage();
 
 //    homePageOptions = [sportsPage, gamesPage];
@@ -49,40 +62,38 @@ class HomePage extends StatelessWidget {
         .map(
           (word) => Padding(
                 padding: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 15.0),
-                child: OutlineButton(
-                  onPressed: () {
+                child: Builder(
+                  builder: (ctx) => OutlineButton(
+                        onPressed: () {
+                          Navigator.of(context).push(new MaterialPageRoute(
+                              builder: (ctxt) => GamesPage(word)));
 //                    setState(() {
 //                      gamesPage.setSport(word);
-//                      homePageIndex = 1;
 //                    });
-                    print(word);
-                    Navigator.push(
-                        context,
-                        new MaterialPageRoute(
-                            builder: (ctxt) => GamesPage(word)));
-                  },
-                  padding: EdgeInsets.fromLTRB(20.0, 10.0, 10.0, 10.0),
-                  borderSide: BorderSide(color: lightblue, width: 2.0),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          word,
-                          style: TextStyle(
-                              fontSize: 17.0,
-                              color: darkblue,
-                              fontFamily: 'Montserrat'),
-                        ),
-                        Icon(Icons.arrow_forward_ios)
-                      ]),
-                  shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(10.0)),
-                  color: ghostwhite,
+                          print(word);
+                        },
+                        padding: EdgeInsets.fromLTRB(20.0, 10.0, 10.0, 10.0),
+                        borderSide: BorderSide(color: lightblue, width: 2.0),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                word,
+                                style: TextStyle(
+                                    fontSize: 17.0,
+                                    color: darkblue,
+                                    fontFamily: 'Montserrat'),
+                              ),
+                              Icon(Icons.arrow_forward_ios)
+                            ]),
+                        shape: new RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(10.0)),
+                        color: ghostwhite,
+                      ),
                 ),
               ),
         )
         .toList();
-
     sportsPage = Padding(
       padding: const EdgeInsets.fromLTRB(36.0, 10.0, 36.0, 10.0),
       child: Column(

@@ -3,56 +3,72 @@ import 'package:flutter/material.dart';
 import 'main.dart';
 import 'HomePage.dart';
 
-class AppPage extends StatefulWidget {
-  AppPage({Key key, this.title}) : super(key: key);
+int appCurrentIndex = 0;
+final appPageOptions = [
+  HomePage(),
+  Container(color: Colors.red),
+  Container(color: Colors.blue),
+];
 
-  final String title;
+
+class MyNavBar extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    return BottomNavigationBar(
+      onTap: (int newtab) {
+        print("new tab tapped: " + newtab.toString());
+        appPage.getState().setState(() {
+          appCurrentIndex = newtab;
+        });
+      },
+      backgroundColor: darkblue,
+      selectedItemColor: lightblue,
+      unselectedItemColor: ghostwhite,
+      type: BottomNavigationBarType.fixed,
+      currentIndex: appCurrentIndex,
+      items: [
+        BottomNavigationBarItem(
+          icon: new Icon(Icons.home),
+          title: new Text('Home'),
+        ),
+        BottomNavigationBarItem(
+          icon: new Icon(Icons.search),
+          title: new Text('Search'),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.person),
+          title: Text('Profile'),
+        )
+      ],
+    );
+  }
+
+}
+
+class AppPage extends StatefulWidget {
+  _AppPageState state;
+
+  getState() {
+    return state;
+  }
 
   @override
-  _AppPageState createState() => _AppPageState();
+  _AppPageState createState() {
+    state = _AppPageState();
+    return state;
+  }
 }
 
 class _AppPageState extends State<AppPage> {
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
-  int _currentIndex = 0;
-  final _pageOptions = [
-    HomePage(),
-    Container(color: Colors.red),
-    Container(color: Colors.blue),
-  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pageOptions[_currentIndex],
+      body: appPageOptions[appCurrentIndex],
       bottomNavigationBar: Hero(
         tag: 'navbar',
-        child: BottomNavigationBar(
-          onTap: (int newtab) {
-            setState(() {
-              _currentIndex = newtab;
-            });
-          },
-          backgroundColor: darkblue,
-          selectedItemColor: lightblue,
-          unselectedItemColor: ghostwhite,
-          type: BottomNavigationBarType.fixed,
-          currentIndex: _currentIndex,
-          items: [
-            BottomNavigationBarItem(
-              icon: new Icon(Icons.home),
-              title: new Text('Home'),
-            ),
-            BottomNavigationBarItem(
-              icon: new Icon(Icons.search),
-              title: new Text('Search'),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              title: Text('Profile'),
-            )
-          ],
-        ),
+        child: MyNavBar(),
       ),
     );
   }

@@ -35,9 +35,12 @@ class FullPage extends StatefulWidget {
   _FullPageState createState() => _FullPageState();
 }
 
+var loginPage = LoginPage();
+var appPage = AppPage();
+
 class _FullPageState extends State<FullPage> {
   int _pageIndex = 0;
-  var _pageOptions = [LoginPage(), AppPage()];
+  var _pageOptions = [loginPage, appPage];
 
   _FullPageState(){
     fullPageState = this;
