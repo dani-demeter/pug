@@ -13,6 +13,8 @@ Color gold = Color(0xfffece2b);
 String input1Value = '';
 String input2Value = '';
 
+int pageDepth = 0;
+
 var fullPage = FullPage();
 _FullPageState fullPageState;
 

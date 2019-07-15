@@ -41,13 +41,6 @@ class LoginPage extends StatelessWidget {
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(15.0))),
   );
 
-//  Material loginButton = Material(
-//    child: LoginButton(),
-//    elevation: 5.0,
-//    color: lightblue,
-//    borderRadius: BorderRadius.circular(15.0),
-//  );
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

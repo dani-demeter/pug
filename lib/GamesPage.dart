@@ -7,7 +7,7 @@ import 'AppPage.dart';
 String sport = "none";
 
 class GamesPage extends StatefulWidget {
-  GamesPage(sport);
+//  GamesPage(sport);
 
   setSport(String selectedSport) {
     sport = selectedSport;
@@ -23,10 +23,6 @@ class _GamesPageState extends State<GamesPage> {
     return Scaffold(
       body: Center(
         child: Text(sport),
-      ),
-      bottomNavigationBar: Hero(
-        tag: 'navbar',
-        child: MyNavBar(),
       ),
     );
   }

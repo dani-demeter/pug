@@ -34,10 +34,45 @@ class _HomePageState extends State<HomePage> {
   var sportsListObjects;
   var sportsPage;
 
-//  var gamesPage;
-//  var homePageOptions;
+  var gamesPage;
+  var homePageOptions;
 
   _HomePageState() {
+    sportsListObjects = sportsList
+        .map(
+          (word) => Padding(
+                padding: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 15.0),
+                child: OutlineButton(
+                  onPressed: () {
+//                          Navigator.of(context).push(new MaterialPageRoute(
+//                              builder: (ctxt) => GamesPage(word)));
+                    setState(() {
+                      pageDepth = 1;
+                      gamesPage.setSport(word);
+                    });
+                    print(word);
+                  },
+                  padding: EdgeInsets.fromLTRB(20.0, 10.0, 10.0, 10.0),
+                  borderSide: BorderSide(color: lightblue, width: 2.0),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          word,
+                          style: TextStyle(
+                              fontSize: 17.0,
+                              color: darkblue,
+                              fontFamily: 'Montserrat'),
+                        ),
+                        Icon(Icons.arrow_forward_ios)
+                      ]),
+                  shape: new RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(10.0)),
+                  color: ghostwhite,
+                ),
+              ),
+        )
+        .toList();
     sportsListTitle = [
       Padding(
           padding: EdgeInsets.fromLTRB(0, 20.0, 0, 10.0),
@@ -51,49 +86,6 @@ class _HomePageState extends State<HomePage> {
       )
     ];
 
-//    gamesPage = GamesPage();
-
-//    homePageOptions = [sportsPage, gamesPage];
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    sportsListObjects = sportsList
-        .map(
-          (word) => Padding(
-                padding: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 15.0),
-                child: Builder(
-                  builder: (ctx) => OutlineButton(
-                        onPressed: () {
-                          Navigator.of(context).push(new MaterialPageRoute(
-                              builder: (ctxt) => GamesPage(word)));
-//                    setState(() {
-//                      gamesPage.setSport(word);
-//                    });
-                          print(word);
-                        },
-                        padding: EdgeInsets.fromLTRB(20.0, 10.0, 10.0, 10.0),
-                        borderSide: BorderSide(color: lightblue, width: 2.0),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                word,
-                                style: TextStyle(
-                                    fontSize: 17.0,
-                                    color: darkblue,
-                                    fontFamily: 'Montserrat'),
-                              ),
-                              Icon(Icons.arrow_forward_ios)
-                            ]),
-                        shape: new RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(10.0)),
-                        color: ghostwhite,
-                      ),
-                ),
-              ),
-        )
-        .toList();
     sportsPage = Padding(
       padding: const EdgeInsets.fromLTRB(36.0, 10.0, 36.0, 10.0),
       child: Column(
@@ -109,6 +101,13 @@ class _HomePageState extends State<HomePage> {
           ]),
       ),
     );
+    gamesPage = GamesPage();
+
+    homePageOptions = [sportsPage, gamesPage];
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: Container(
@@ -122,7 +121,7 @@ class _HomePageState extends State<HomePage> {
 //              ],
 //            ),
 //          ),
-          child: sportsPage,
+          child: homePageOptions[pageDepth],
         ),
       ),
     );
