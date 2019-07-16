@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
 //                          Navigator.of(context).push(new MaterialPageRoute(
 //                              builder: (ctxt) => GamesPage(word)));
                         setState(() {
-                          pageDepth = 1;
+                          pageDepth.value = 1;
                           gamesPage.setSport(word);
                         });
                         print(word);
@@ -129,7 +129,13 @@ class _HomePageState extends State<HomePage> {
 //              ],
 //            ),
 //          ),
-              child: homePageOptions[pageDepth],
+              child: ValueListenableBuilder<int>(
+                valueListenable: pageDepth,
+//                builder: ,
+                builder: (context, value, child)=>homePageOptions[pageDepth.value],
+
+//                child: homePageOptions[pageDepth.value],
+              ),
             ),
           ),
         ),

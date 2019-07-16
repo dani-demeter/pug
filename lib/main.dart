@@ -18,7 +18,8 @@ Color highlight = gold;
 String input1Value = '';
 String input2Value = '';
 
-int pageDepth = 0;
+//int pageDepth = 0;
+var pageDepth = ValueNotifier(0);
 
 var fullPage = FullPage();
 _FullPageState fullPageState;

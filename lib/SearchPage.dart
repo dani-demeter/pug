@@ -12,14 +12,13 @@ var searchPage2;
 class SearchPage extends StatefulWidget {
   _SearchPageState myState;
 
-  getState(){
+  getState() {
     return myState;
   }
 
-  updateState(){
-    myState.setState((){});
+  updateState() {
+    myState.setState(() {});
   }
-
 
   @override
   _SearchPageState createState() {
@@ -95,7 +94,7 @@ class _SearchPageState extends State<SearchPage> {
                                 onPressed: () {
                                   print(user);
                                   setState(() {
-                                    pageDepth = 1;
+                                    pageDepth.value = 1;
                                   });
                                 },
 //                  padding: EdgeInsets.fromLTRB(20.0, 10.0, 10.0, 10.0),
@@ -130,7 +129,7 @@ class _SearchPageState extends State<SearchPage> {
       color: Colors.orange,
     );
     searchPageOptions = [searchPage1, searchPage2];
-    print("rebuilt search page" + pageDepth.toString());
+//    print("rebuilt search page" + pageDepth.toString());
     return Scaffold(
       body: Container(
         color: contrast,
@@ -139,7 +138,11 @@ class _SearchPageState extends State<SearchPage> {
             color: primary,
             child: Padding(
               padding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-              child: searchPageOptions[pageDepth],
+              child: ValueListenableBuilder<int>(
+                valueListenable: pageDepth,
+                builder: (context, value, child)=>searchPageOptions[pageDepth.value],
+//                child: searchPageOptions[pageDepth.value],
+              ),
             ),
           ),
         ),

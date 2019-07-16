@@ -187,9 +187,9 @@ class _GamesPageState extends State<GamesPage> {
                     children: [
                       FlatButton(
                         onPressed: () {
-                          pageDepth -= 1;
-                          appPage.getState().setState();
-                          homePage.getState().setState();
+                          pageDepth.value--;
+//                          appPage.getState().setState();
+//                          homePage.getState().setState();
                         },
                         child: Row(
                           children: [

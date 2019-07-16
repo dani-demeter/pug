@@ -28,12 +28,8 @@ class AppPage extends StatefulWidget {
 }
 
 Future<bool> _willPopCallback() async {
-  if (pageDepth != 0) {
-    pageDepth -= 1;
-    searchPage.getState().setState();
-    homePage.getState().setState();
-    print("supposed to rebuild everything");
-    appPage.getState().setState();
+  if (pageDepth.value != 0) {
+    pageDepth.value--;
   } else {
     return true;
   }
@@ -51,7 +47,7 @@ class _AppPageState extends State<AppPage> {
         bottomNavigationBar: BottomNavigationBar(
           onTap: (int newtab) {
             setState(() {
-              pageDepth = 0;
+              pageDepth.value = 0;
               appCurrentIndex = newtab;
             });
           },
