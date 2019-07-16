@@ -4,33 +4,22 @@ import 'dart:convert';
 import 'main.dart';
 import 'HomePage.dart';
 import 'AppPage.dart';
+import 'ProfilePage.dart';
 
 var searchPageOptions;
 var searchPage1;
-var searchPage2;
+var searchPage2 = ProfilePage();
 
 class SearchPage extends StatefulWidget {
-  _SearchPageState myState;
-
-  getState() {
-    return myState;
-  }
-
-  updateState() {
-    myState.setState(() {});
-  }
-
   @override
-  _SearchPageState createState() {
-    myState = _SearchPageState();
-    return myState;
-  }
+  _SearchPageState createState() => _SearchPageState();
 }
 
-List<String> foundUsers = [];
+//List<String> foundUsers = [];
+var foundUsers = ValueNotifier(<String>[]);
 
 getUsers(String query) {
-  foundUsers = [
+  foundUsers.value = [
     "dooni1313",
     "dooniisauser",
     "dooniwastaken",
@@ -44,91 +33,102 @@ getUsers(String query) {
   ];
 }
 
+var searchQuery = "";
+
 class _SearchPageState extends State<SearchPage> {
-  @override
-  Widget build(BuildContext context) {
-    searchPage1 = Column(
-      children: [
-        Padding(
-          padding: EdgeInsets.fromLTRB(0, 10.0, 0, 10.0),
-          child: FittedBox(
-            fit: BoxFit.fitWidth,
-            child: Text(
-              "SEARCH FOR A USER",
-              style: TextStyle(fontSize: 30.0, fontFamily: 'Montserrat'),
+  var textFieldController = TextEditingController();
+  _SearchPageState(){
+    searchPage1 = Padding(
+      padding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+      child: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.fromLTRB(0, 10.0, 0, 10.0),
+            child: FittedBox(
+              fit: BoxFit.fitWidth,
+              child: Text(
+                "SEARCH FOR A USER",
+                style: TextStyle(fontSize: 30.0, fontFamily: 'Montserrat'),
+              ),
             ),
           ),
-        ),
-        Padding(
-          padding: EdgeInsets.fromLTRB(0, 0.0, 0, 15.0),
-          child: Container(
-            height: 2.0,
-            color: highlight,
+          Padding(
+            padding: EdgeInsets.fromLTRB(0, 0.0, 0, 15.0),
+            child: Container(
+              height: 2.0,
+              color: highlight,
+            ),
           ),
-        ),
-        TextField(
-          onChanged: (search) {
-            getUsers(search);
-            setState(() {});
-          },
-          style: TextStyle(
-              color: common, fontFamily: 'Montserrat', fontSize: 20.0),
-          decoration: InputDecoration(
-              contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-              hintText: "Username",
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15.0))),
-        ),
-        Expanded(
-          child: ListView(
-              children: foundUsers
-                  .map<Widget>(
-                    (user) => Padding(
-                          padding:
-                              const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
-                          child: Material(
-                            color: primary,
-                            child: InkWell(
-                              splashColor: highlight,
-                              child: OutlineButton(
-                                onPressed: () {
-                                  print(user);
-                                  setState(() {
-                                    pageDepth.value = 1;
-                                  });
-                                },
+          TextField(
+            controller: textFieldController,
+            onChanged: (search) {
+              searchQuery = search;
+              getUsers(search);
+            },
+            style: TextStyle(
+                color: common, fontFamily: 'Montserrat', fontSize: 20.0),
+            decoration: InputDecoration(
+                contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                hintText: "Username",
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15.0))),
+          ),
+          Expanded(
+            child: ValueListenableBuilder(
+                valueListenable: foundUsers,
+                builder: (context, value, child) => ListView(
+                    children: foundUsers.value
+                        .map<Widget>(
+                          (user) => Padding(
+                        padding: const EdgeInsets.fromLTRB(
+                            10.0, 10.0, 10.0, 0.0),
+                        child: Material(
+                          color: primary,
+                          child: InkWell(
+                            splashColor: highlight,
+                            child: OutlineButton(
+                              onPressed: () {
+                                print(user);
+                                searchPage2.setUser(user);
+                                setState(() {
+                                  pageDepth.value = 1;
+                                });
+                              },
 //                  padding: EdgeInsets.fromLTRB(20.0, 10.0, 10.0, 10.0),
-                                borderSide:
-                                    BorderSide(color: common, width: 2.0),
-                                child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        user,
-                                        style: TextStyle(
-                                            fontSize: 17.0,
-                                            color: contrast,
-                                            fontFamily: 'Montserrat'),
-                                      ),
-                                      Icon(Icons.arrow_forward_ios)
-                                    ]),
-                                shape: new RoundedRectangleBorder(
-                                    borderRadius:
-                                        new BorderRadius.circular(10.0)),
-                              ),
+                              borderSide:
+                              BorderSide(color: common, width: 2.0),
+                              child: Row(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      user,
+                                      style: TextStyle(
+                                          fontSize: 17.0,
+                                          color: contrast,
+                                          fontFamily: 'Montserrat'),
+                                    ),
+                                    Icon(Icons.arrow_forward_ios)
+                                  ]),
+                              shape: new RoundedRectangleBorder(
+                                  borderRadius:
+                                  new BorderRadius.circular(10.0)),
                             ),
                           ),
                         ),
-                  )
-                  .toList()),
-        ),
-      ],
-    );
-    searchPage2 = Container(
-      color: Colors.orange,
+                      ),
+                    )
+                        .toList())),
+          ),
+        ],
+      ),
     );
     searchPageOptions = [searchPage1, searchPage2];
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    textFieldController.text = searchQuery;
 //    print("rebuilt search page" + pageDepth.toString());
     return Scaffold(
       body: Container(
@@ -136,13 +136,11 @@ class _SearchPageState extends State<SearchPage> {
         child: SafeArea(
           child: Container(
             color: primary,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-              child: ValueListenableBuilder<int>(
-                valueListenable: pageDepth,
-                builder: (context, value, child)=>searchPageOptions[pageDepth.value],
+            child: ValueListenableBuilder<int>(
+              valueListenable: pageDepth,
+              builder: (context, value, child) =>
+                  searchPageOptions[pageDepth.value],
 //                child: searchPageOptions[pageDepth.value],
-              ),
             ),
           ),
         ),
