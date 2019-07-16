@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 
 import 'main.dart';
 import 'HomePage.dart';
+import 'SearchPage.dart';
 
 int appCurrentIndex = 0;
 HomePage homePage = HomePage();
+SearchPage searchPage = SearchPage();
 final appPageOptions = [
   homePage,
-  Container(color: Colors.red),
+  searchPage,
   Container(color: Colors.blue),
 ];
 
@@ -26,11 +28,13 @@ class AppPage extends StatefulWidget {
 }
 
 Future<bool> _willPopCallback() async {
-  if(pageDepth!=0){
+  if (pageDepth != 0) {
     pageDepth -= 1;
-    appPage.getState().setState((){});
-    homePage.getState().setState((){});
-  }else{
+    searchPage.getState().setState();
+    homePage.getState().setState();
+    print("supposed to rebuild everything");
+    appPage.getState().setState();
+  } else {
     return true;
   }
 }
@@ -46,7 +50,7 @@ class _AppPageState extends State<AppPage> {
         body: appPageOptions[appCurrentIndex],
         bottomNavigationBar: BottomNavigationBar(
           onTap: (int newtab) {
-            appPage.getState().setState(() {
+            setState(() {
               pageDepth = 0;
               appCurrentIndex = newtab;
             });

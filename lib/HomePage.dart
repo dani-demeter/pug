@@ -41,41 +41,46 @@ class _HomePageState extends State<HomePage> {
     sportsListObjects = sportsList
         .map(
           (word) => Padding(
-                padding: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 15.0),
-                child: OutlineButton(
-                  onPressed: () {
+                padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
+                child: Material(
+                  color: primary,
+                  child: InkWell(
+                    splashColor: highlight,
+                    child: OutlineButton(
+                      onPressed: () {
 //                          Navigator.of(context).push(new MaterialPageRoute(
 //                              builder: (ctxt) => GamesPage(word)));
-                    setState(() {
-                      pageDepth = 1;
-                      gamesPage.setSport(word);
-                    });
-                    print(word);
-                  },
+                        setState(() {
+                          pageDepth = 1;
+                          gamesPage.setSport(word);
+                        });
+                        print(word);
+                      },
 //                  padding: EdgeInsets.fromLTRB(20.0, 10.0, 10.0, 10.0),
-                  borderSide: BorderSide(color: common, width: 2.0),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          word,
-                          style: TextStyle(
-                              fontSize: 17.0,
-                              color: contrast,
-                              fontFamily: 'Montserrat'),
-                        ),
-                        Icon(Icons.arrow_forward_ios)
-                      ]),
-                  shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(10.0)),
-                  color: primary,
+                      borderSide: BorderSide(color: common, width: 2.0),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              word,
+                              style: TextStyle(
+                                  fontSize: 17.0,
+                                  color: contrast,
+                                  fontFamily: 'Montserrat'),
+                            ),
+                            Icon(Icons.arrow_forward_ios)
+                          ]),
+                      shape: new RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(10.0)),
+                    ),
+                  ),
                 ),
               ),
         )
         .toList();
     sportsListTitle = [
       Padding(
-          padding: EdgeInsets.fromLTRB(0, 20.0, 0, 10.0),
+          padding: EdgeInsets.fromLTRB(0, 10.0, 0, 10.0),
           child: Text(
             "SPORTS",
             style: TextStyle(fontSize: 30.0, fontFamily: 'Montserrat'),
@@ -109,9 +114,12 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Container(
-          color: primary,
+      body: Container(
+        color: contrast,
+        child: SafeArea(
+          child: Center(
+            child: Container(
+              color: primary,
 //          decoration: const BoxDecoration(
 //            gradient: LinearGradient(
 //              colors: <Color>[
@@ -121,7 +129,9 @@ class _HomePageState extends State<HomePage> {
 //              ],
 //            ),
 //          ),
-          child: homePageOptions[pageDepth],
+              child: homePageOptions[pageDepth],
+            ),
+          ),
         ),
       ),
     );

@@ -6,17 +6,13 @@ class LoginPage extends StatelessWidget {
   static TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
   TextField emailField = TextField(
     onTap: () {
-//      setState(() {
-//        emailHint = "";
-//        passHint = "Password";
-//      });
     },
     onChanged: (String val) {
       input1Value = val;
     },
     obscureText: false,
     style: style,
-    textAlign: TextAlign.center,
+//    textAlign: TextAlign.center,
     decoration: InputDecoration(
         contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         hintText: "Username",
@@ -34,7 +30,7 @@ class LoginPage extends StatelessWidget {
       input2Value = val;
     },
     style: style,
-    textAlign: TextAlign.center,
+//    textAlign: TextAlign.center,
     decoration: InputDecoration(
         contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         hintText: "Password",

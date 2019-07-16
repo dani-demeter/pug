@@ -27,14 +27,15 @@ var matchElements = matches
       (match) => Padding(
             padding: EdgeInsets.fromLTRB(40.0, 15.0, 40.0, 15.0),
             child: Material(
+              color: primary,
               child: InkWell(
+                splashColor: highlight,
                 onTap: () {
                   print(match);
                 },
                 child: Container(
                   height: 100,
                   decoration: BoxDecoration(
-                    color: primary,
                     border: Border.all(width: 1, color: common),
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   ),
@@ -122,25 +123,30 @@ var matchElements = matches
                                     )),
                                   ]),
                               Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Expanded(
-                                        child: Container(
-                                      child: Row(children: [
-                                        Icon(
-                                          Icons.pin_drop,
-                                          color: common,
-                                        ),
-                                        Padding(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: Container(
+                                      child: Row(
+                                        children: [
+                                          Icon(
+                                            Icons.pin_drop,
+                                            color: common,
+                                          ),
+                                          Padding(
                                             padding:
                                                 EdgeInsets.fromLTRB(5, 0, 0, 0),
                                             child: Text(
                                                 match['location'].toString(),
-                                                style: infoStyle)),
-                                      ]),
-                                    )),
-                                  ])
+                                                style: infoStyle),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                         ),
@@ -182,8 +188,8 @@ class _GamesPageState extends State<GamesPage> {
                       FlatButton(
                         onPressed: () {
                           pageDepth -= 1;
-                          appPage.getState().setState(() {});
-                          homePage.getState().setState(() {});
+                          appPage.getState().setState();
+                          homePage.getState().setState();
                         },
                         child: Row(
                           children: [
@@ -216,12 +222,15 @@ class _GamesPageState extends State<GamesPage> {
                     padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 0.0),
                     child: Column(
                       children: [
-                        Text(
-                          sport.toUpperCase() + " GAMES",
-                          style: TextStyle(
-                              color: contrast,
-                              fontSize: 30.0,
-                              fontFamily: 'Montserrat'),
+                        FittedBox(
+                          fit: BoxFit.fitWidth,
+                          child: Text(
+                            sport.toUpperCase() + " MATCHES",
+                            style: TextStyle(
+                                color: contrast,
+                                fontSize: 30.0,
+                                fontFamily: 'Montserrat'),
+                          ),
                         ),
                         Container(
                           height: 2.0,
