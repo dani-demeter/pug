@@ -15,22 +15,16 @@ class SearchPage extends StatefulWidget {
   _SearchPageState createState() => _SearchPageState();
 }
 
-//List<String> foundUsers = [];
-var foundUsers = ValueNotifier(<String>[]);
+//List<String> foundUsernames = [];
+var foundUsernames = ValueNotifier(<String>[]);
+String foundUsersString = """[{"username": "dooni1313", "reliability": 5.0,"replayability": 4.5, "attending": [12345, 45678]},{"username": "dooniisa", "reliability": 4.5,"replayability": 4.5, "attending": [12345, 45678]},{"username": "dooniwastaken", "reliability": 4.0,"replayability": 4.5, "attending": [12345, 45678]},{"username": "dooni1313", "reliability": 3.5,"replayability": 4.5, "attending": [12345, 45678]},{"username": "anotherdooni", "reliability": 3.0,"replayability": 4.5, "attending": [12345, 45678]},{"username": "dooni420", "reliability": 2.5,"replayability": 4.5, "attending": [12345, 45678]},{"username": "og_dooni", "reliability": 2.0,"replayability": 4.5, "attending": [12345, 45678]},{"username": "dooni2.0", "reliability": 1.5,"replayability": 4.5, "attending": [12345, 45678]},{"username": "notDooni", "reliability": 1.0,"replayability": 4.5, "attending": [12345, 45678]}]""";
+var foundUsers=[]; //must be array
 
 getUsers(String query) {
-  foundUsers.value = [
-    "dooni1313",
-    "dooniisauser",
-    "dooniwastaken",
-    "anotherdooni",
-    "dooni420",
-    "dooni1313",
-    "dooniisauser",
-    "dooniwastaken",
-    "anotherdooni",
-    "dooni420"
-  ];
+  //do http request
+  foundUsers = json.decode(foundUsersString);
+  List<String> fusers = foundUsers.map<String>((u)=>u['username'].toString()).toList();
+  foundUsernames.value = fusers;
 }
 
 var searchQuery = "";
@@ -75,9 +69,9 @@ class _SearchPageState extends State<SearchPage> {
           ),
           Expanded(
             child: ValueListenableBuilder(
-                valueListenable: foundUsers,
+                valueListenable: foundUsernames,
                 builder: (context, value, child) => ListView(
-                    children: foundUsers.value
+                    children: foundUsers
                         .map<Widget>(
                           (user) => Padding(
                         padding: const EdgeInsets.fromLTRB(
@@ -102,7 +96,7 @@ class _SearchPageState extends State<SearchPage> {
                                   MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      user,
+                                      user['username'],
                                       style: TextStyle(
                                           fontSize: 17.0,
                                           color: contrast,
