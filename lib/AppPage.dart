@@ -5,6 +5,9 @@ import 'HomePage.dart';
 import 'SearchPage.dart';
 
 int appCurrentIndex = 0;
+
+bool changedTabs = false;
+int appPrevIndex = 0;
 HomePage homePage = HomePage();
 SearchPage searchPage = SearchPage();
 final appPageOptions = [
@@ -12,19 +15,13 @@ final appPageOptions = [
   searchPage,
   Container(color: Colors.blue),
 ];
+List pageStack = [[],[],[]];
+List pageCatalogue = [homePage, searchPage, Container(color: Colors.blue,)];
 
 class AppPage extends StatefulWidget {
-  _AppPageState state;
-
-  getState() {
-    return state;
-  }
 
   @override
-  _AppPageState createState() {
-    state = _AppPageState();
-    return state;
-  }
+  _AppPageState createState() => _AppPageState();
 }
 
 Future<bool> _willPopCallback() async {
@@ -48,6 +45,7 @@ class _AppPageState extends State<AppPage> {
           onTap: (int newtab) {
             setState(() {
               pageDepth.value = 0;
+              appPrevIndex = appCurrentIndex;
               appCurrentIndex = newtab;
             });
           },
