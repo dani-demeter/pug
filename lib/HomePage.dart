@@ -2,19 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'main.dart';
 import 'GamesPage.dart';
+import 'AppPage.dart';
 
 class HomePage extends StatefulWidget {
-  _HomePageState myState;
-
-  _HomePageState getState() {
-    return myState;
-  }
-
   @override
-  _HomePageState createState() {
-    myState = _HomePageState();
-    return myState;
-  }
+  _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
@@ -34,9 +26,6 @@ class _HomePageState extends State<HomePage> {
   var sportsListObjects;
   var sportsPage;
 
-  var gamesPage;
-  var homePageOptions;
-
   _HomePageState() {
     sportsListObjects = sportsList
         .map(
@@ -48,15 +37,12 @@ class _HomePageState extends State<HomePage> {
                     splashColor: highlight,
                     child: OutlineButton(
                       onPressed: () {
-//                          Navigator.of(context).push(new MaterialPageRoute(
-//                              builder: (ctxt) => GamesPage(word)));
-                        setState(() {
-                          pageDepth.value = 1;
-                          gamesPage.setSport(word);
-                        });
+                        pageStack[0].add({"pageIndex": 3, "sport": word});
+                        pageCatalogue[3].setSport(word);
+                        gamesPage.setSport(word);
+                        pageDepth.value = 1;
                         print(word);
                       },
-//                  padding: EdgeInsets.fromLTRB(20.0, 10.0, 10.0, 10.0),
                       borderSide: BorderSide(color: common, width: 2.0),
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -106,9 +92,6 @@ class _HomePageState extends State<HomePage> {
           ]),
       ),
     );
-    gamesPage = GamesPage();
-
-    homePageOptions = [sportsPage, gamesPage];
   }
 
   @override
@@ -129,13 +112,14 @@ class _HomePageState extends State<HomePage> {
 //              ],
 //            ),
 //          ),
-              child: ValueListenableBuilder<int>(
-                valueListenable: pageDepth,
-//                builder: ,
-                builder: (context, value, child)=>homePageOptions[pageDepth.value],
-
-//                child: homePageOptions[pageDepth.value],
-              ),
+            child: sportsPage,
+//              child: ValueListenableBuilder<int>(
+//                valueListenable: pageDepth,
+////                builder: (context, value, child)=>homePageOptions[pageDepth.value],
+//                builder: (context, value, child)=>,
+//
+////                child: homePageOptions[pageDepth.value],
+//              ),
             ),
           ),
         ),

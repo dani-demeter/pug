@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'main.dart';
 import 'HomePage.dart';
 import 'SearchPage.dart';
+import 'GamesPage.dart';
+import 'ProfilePage.dart';
+import 'MatchPage.dart';
 
 int appCurrentIndex = 0;
 
@@ -10,25 +13,58 @@ bool changedTabs = false;
 int appPrevIndex = 0;
 HomePage homePage = HomePage();
 SearchPage searchPage = SearchPage();
-final appPageOptions = [
+GamesPage gamesPage = GamesPage();
+ProfilePage profilePage = ProfilePage();
+MatchPage matchPage = MatchPage();
+//final appPageOptions = [
+//  homePage,
+//  searchPage,
+//  Container(color: Colors.blue),
+//];
+List pageCatalogue = [
   homePage,
   searchPage,
-  Container(color: Colors.blue),
+  Container(
+    color: Colors.blue,
+  ),
+  gamesPage,
+  profilePage,
+  matchPage
 ];
-List pageStack = [[],[],[]];
-List pageCatalogue = [homePage, searchPage, Container(color: Colors.blue,)];
+// 0 = homePage
+// 1 = searchPage
+// 2 = profile page
+// 3 = gamesPage
+// 4 = profilePage
+// 5 = matchPage
+List<List<dynamic>> pageStack = [
+  [
+    {"pageIndex": 0}
+  ],
+  [
+    {"pageIndex": 1}
+  ],
+  [
+    {"pageIndex": 2}
+  ]
+];
 
 class AppPage extends StatefulWidget {
-
   @override
   _AppPageState createState() => _AppPageState();
 }
 
-Future<bool> _willPopCallback() async {
-  if (pageDepth.value != 0) {
-    pageDepth.value--;
-  } else {
-    return true;
+setupNewPage() {
+  var pageData = pageStack[appCurrentIndex][pageDepth.value];
+  var pi = pageData['pageIndex'];
+  if (pi==2) {
+    pageCatalogue[pi].setUser(pageData["user"]);
+  }else if(pi==3){
+    pageCatalogue[pi].setSport(pageData["sport"]);
+  }else if(pi==4){
+    pageCatalogue[pi].setUser(pageData["user"]);
+  }else if(pi==5){
+    pageCatalogue[pi].setMatch(pageData["match"]);
   }
 }
 
@@ -38,15 +74,52 @@ class _AppPageState extends State<AppPage> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: _willPopCallback,
+      onWillPop: () async {
+        print("was " + pageStack.toString());
+        if (pageDepth.value != 0) {
+          pageStack[appCurrentIndex].removeLast();
+          pageDepth.value--;
+        } else {
+          if (changedTabs) {
+            setState(() {
+              appCurrentIndex = appPrevIndex;
+              changedTabs = false;
+              pageDepth.value = pageStack[appCurrentIndex].length - 1;
+            });
+          } else {
+            return true;
+          }
+        }
+        print("is now " + pageStack.toString());
+        setupNewPage();
+        return false;
+      },
       child: Scaffold(
-        body: appPageOptions[appCurrentIndex],
+        body: Container(
+          color: contrast,
+          child: SafeArea(
+            child: Container(
+              color: primary,
+              padding: EdgeInsets.fromLTRB(0, 0, 0, 15.0),
+              child: ValueListenableBuilder(
+                  valueListenable: pageDepth,
+                  builder: (context, value, child) =>
+                  pageCatalogue[
+                  pageStack[appCurrentIndex][pageDepth.value]
+                  ['pageIndex']]),
+            ),
+          ),
+        ),
+//        body: pageCatalogue[pageStack[appCurrentIndex][pageDepth.value]
+//            ['pageIndex']],
         bottomNavigationBar: BottomNavigationBar(
           onTap: (int newtab) {
             setState(() {
-              pageDepth.value = 0;
+              changedTabs = true;
               appPrevIndex = appCurrentIndex;
               appCurrentIndex = newtab;
+              pageDepth.value = pageStack[newtab].length - 1;
+              setupNewPage();
             });
           },
           backgroundColor: contrast,
