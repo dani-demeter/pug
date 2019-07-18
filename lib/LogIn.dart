@@ -5,27 +5,18 @@ import 'main.dart';
 class LoginPage extends StatelessWidget {
   static TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
   TextField emailField = TextField(
-    onTap: () {
-    },
     onChanged: (String val) {
       input1Value = val;
     },
     obscureText: false,
     style: style,
-//    textAlign: TextAlign.center,
     decoration: InputDecoration(
         contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         hintText: "Username",
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(15.0))),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0))),
   );
   TextField passwordField = TextField(
     obscureText: true,
-    onTap: () {
-//      setState(() {
-//        emailHint = "Username";
-//        passHint = "";
-//      });
-    },
     onChanged: (String val) {
       input2Value = val;
     },
@@ -34,7 +25,7 @@ class LoginPage extends StatelessWidget {
     decoration: InputDecoration(
         contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         hintText: "Password",
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(15.0))),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0))),
   );
 
   @override
@@ -65,12 +56,9 @@ class LoginPage extends StatelessWidget {
                   height: 15.0,
                 ),
                 RaisedButton(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
                   onPressed: () {
                     fullPageState.logIn();
-//                    Navigator.push(
-//                        context,
-//                        new MaterialPageRoute(
-//                            builder: (ctxt) => new AppPage()));
                   },
                   child: Container(
                     width: MediaQuery.of(context).size.width,
@@ -78,7 +66,7 @@ class LoginPage extends StatelessWidget {
                     child: Text(
                       'Login',
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 20.0),
+                      style: TextStyle(color: contrast, fontSize: 20.0, fontFamily: 'Montserrat'),
                     ),
                   ),
                   color: common,

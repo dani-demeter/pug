@@ -12,7 +12,7 @@ class UserButton extends StatelessWidget{
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(
-          10.0, 10.0, 10.0, 0.0),
+          10.0, 5.0, 10.0, 0.0),
       child: Material(
         color: primary,
         child: InkWell(
@@ -24,7 +24,6 @@ class UserButton extends StatelessWidget{
               pageCatalogue[4].setUser(user);
               pageDepth.value++;
             },
-//                  padding: EdgeInsets.fromLTRB(20.0, 10.0, 10.0, 10.0),
             borderSide:
             BorderSide(color: common, width: 2.0),
             child: Row(

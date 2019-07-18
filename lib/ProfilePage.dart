@@ -64,7 +64,8 @@ class ProfilePage extends StatelessWidget {
                       onPressed: () {},
                       icon: Icon(
                         Icons.person_add,
-                        color: common,
+                        color: highlight,
+                        size: 35,
                       ),
                     ),
                   ],

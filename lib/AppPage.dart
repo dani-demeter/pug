@@ -33,7 +33,7 @@ List pageCatalogue = [
 ];
 // 0 = homePage
 // 1 = searchPage
-// 2 = profile page
+// 2 = TODO profile page
 // 3 = gamesPage
 // 4 = profilePage
 // 5 = matchPage
@@ -57,9 +57,7 @@ class AppPage extends StatefulWidget {
 setupNewPage() {
   var pageData = pageStack[appCurrentIndex][pageDepth.value];
   var pi = pageData['pageIndex'];
-  if (pi==2) {
-    pageCatalogue[pi].setUser(pageData["user"]);
-  }else if(pi==3){
+  if(pi==3){
     pageCatalogue[pi].setSport(pageData["sport"]);
   }else if(pi==4){
     pageCatalogue[pi].setUser(pageData["user"]);

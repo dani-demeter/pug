@@ -86,40 +86,51 @@ class MatchPage extends StatelessWidget {
         Expanded(
           child: Container(
             child: ListView(
-              children: [
-                Match(fullmatch, false),
-                Container(
-                  padding: EdgeInsets.fromLTRB(20.0, 0, 20.0, 15.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "ATTENDING",
-                        style: TextStyle(
-                            color: contrast,
-                            fontSize: 20,
-                            fontFamily: 'Montserrat'),
-                      ),
-                      Container(
-                        height: 2.0,
-                        color: highlight,
-                      ),
-                    ],
+                children: [
+              Match(fullmatch, false),
+              Container(
+                padding: EdgeInsets.fromLTRB(30, 0, 30, 10),
+                child: RaisedButton(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                    child: Text(
+                      "Count me in!",
+                      style: TextStyle(
+                          color: contrast,
+                          fontFamily: 'Montserrat',
+                          fontSize: 20),
+                    ),
                   ),
+                  onPressed: () {
+                    openMap(matchLocation);
+                  },
+                  padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
+                  color: highlight,
                 ),
-              ]
-                ..addAll(
-                  players.map((player) => UserButton(player)),
-                )
-                ..addAll([
-                  RaisedButton(
-                    child: Text("Count me in!"),
-                    onPressed: () {
-                      openMap(matchLocation);
-                    },
-                  ),
-                ]),
-            ),
+              ),
+              Container(
+                padding: EdgeInsets.fromLTRB(20.0, 0, 20.0, 5.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "ATTENDING",
+                      style: TextStyle(
+                          color: contrast,
+                          fontSize: 20,
+                          fontFamily: 'Montserrat'),
+                    ),
+                    Container(
+                      height: 2.0,
+                      color: highlight,
+                    ),
+                  ],
+                ),
+              ),
+            ]..addAll(
+                    players.map((player) => UserButton(player)),
+                  )),
           ),
         ),
       ],
