@@ -1,4 +1,4 @@
-###Elixir Installation
+### Elixir Installation
 
 ```bash
 #! /bin/sh
@@ -16,13 +16,13 @@ su $usr
 ```
 
 
-###Dependencies
+### Dependencies
 
 ```bash
 $ mix deps.get
 ```
 
-###Running the Application
+### Running the Application
 
 ```bash
 $ mix run --no-halt
