@@ -99,7 +99,7 @@ class MatchPage extends StatelessWidget {
                     child: Text(
                       "Count me in!",
                       style: TextStyle(
-                          color: contrast,
+                          color: secondary,
                           fontFamily: 'Montserrat',
                           fontSize: 20),
                     ),
@@ -119,7 +119,7 @@ class MatchPage extends StatelessWidget {
                     Text(
                       "ATTENDING",
                       style: TextStyle(
-                          color: contrast,
+                          color: secondary,
                           fontSize: 20,
                           fontFamily: 'Montserrat'),
                     ),

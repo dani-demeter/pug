@@ -70,7 +70,7 @@ class LoginPage extends StatelessWidget {
                             'Login',
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                color: contrast,
+                                color: secondary,
                                 fontSize: 20.0,
                                 fontFamily: 'Montserrat'),
                           ),

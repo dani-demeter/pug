@@ -123,8 +123,8 @@ class _AppPageState extends State<AppPage> {
                   });
                 },
                 backgroundColor: contrast,
-                selectedItemColor: common,
-                unselectedItemColor: primary,
+                selectedItemColor: highlight,
+                unselectedItemColor: common,
                 type: BottomNavigationBarType.fixed,
                 currentIndex: appCurrentIndex,
                 items: [

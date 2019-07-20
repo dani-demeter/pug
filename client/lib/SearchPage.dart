@@ -45,8 +45,10 @@ class _SearchPageState extends State<SearchPage> {
                     fit: BoxFit.fitWidth,
                     child: Text(
                       "SEARCH FOR A USER",
-                      style:
-                          TextStyle(fontSize: 30.0, fontFamily: 'Montserrat'),
+                      style: TextStyle(
+                          fontSize: 30.0,
+                          fontFamily: 'Montserrat',
+                          color: secondary),
                     ),
                   ),
                 ),
@@ -58,6 +60,7 @@ class _SearchPageState extends State<SearchPage> {
                   ),
                 ),
                 TextField(
+                  cursorColor: highlight,
                   controller: textFieldController,
                   onChanged: (search) {
                     searchQuery = search;
@@ -66,18 +69,25 @@ class _SearchPageState extends State<SearchPage> {
                   style: TextStyle(
                       color: common, fontFamily: 'Montserrat', fontSize: 20.0),
                   decoration: InputDecoration(
-                      contentPadding:
-                          EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                      hintText: "Username",
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15.0))),
+                    hintStyle: TextStyle(color: secondary),
+                    contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                    hintText: "Username",
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: secondary, width: 1.0),
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(color: secondary, width: 1.0),
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                  ),
                 ),
                 Expanded(
                   child: ValueListenableBuilder(
                       valueListenable: foundUsernames,
                       builder: (context, value, child) {
                         if (foundUsernames.value.length == 0) {
-                          return Image.asset("searching.gif");
+                          return Image.asset("searching.png");
                         } else {
                           return ListView(
                               children: foundUsers

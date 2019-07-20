@@ -13,9 +13,10 @@ Color gold = Color(0xfffece2b);
 Color dark = Color(0xff090821);
 Color infrared = Color(0xffEF476F);
 Color mint = Color(0xff24FBCA);
-Color bleu = Color(0xff003952);
+Color lightercadet = Color(0xff4F549B);
 
 Color primary = ghostwhite;
+Color secondary = darkblue;
 Color contrast = darkblue;
 Color common = lightblue;
 Color highlight = gold;
@@ -35,7 +36,8 @@ var themeStyle = ValueNotifier(0);
 
 enableDarkMode(){
   primary = darkblue;
-  contrast = bleu;
+  secondary = ghostwhite;
+  contrast = lightercadet;
   highlight = mint;
   common = infrared;
   themeStyle.value = 1;
@@ -43,6 +45,7 @@ enableDarkMode(){
 
 enableLightMode(){
   primary = ghostwhite;
+  secondary = darkblue;
   contrast = darkblue;
   common = lightblue;
   highlight = gold;

@@ -106,7 +106,7 @@ class ProfilePage extends StatelessWidget {
                                       Text(
                                         profileUsername.value,
                                         style: TextStyle(
-                                          color: contrast,
+                                          color: secondary,
                                           fontSize: 28 -
                                               profileUsername.value.length
                                                   .toDouble(),
@@ -132,7 +132,7 @@ class ProfilePage extends StatelessWidget {
                                       ..addAll(List(_reliability.floor())
                                           .map<Widget>((e) => Icon(
                                                 Icons.star,
-                                                color: contrast,
+                                                color: secondary,
                                                 size: 20,
                                               ))
                                           .toList())
@@ -142,14 +142,14 @@ class ProfilePage extends StatelessWidget {
                                               : 0)
                                           .map<Widget>((e) => Icon(
                                                 Icons.star_half,
-                                                color: contrast,
+                                                color: secondary,
                                                 size: 20,
                                               ))
                                           .toList())
                                       ..addAll(List(5 - _reliability.ceil())
                                           .map<Widget>((e) => Icon(
                                                 Icons.star_border,
-                                                color: contrast,
+                                                color: secondary,
                                                 size: 20,
                                               ))
                                           .toList()),
@@ -171,7 +171,7 @@ class ProfilePage extends StatelessWidget {
                                       ..addAll(List(_replayability.floor())
                                           .map<Widget>((e) => Icon(
                                                 DaniFont.heart_full,
-                                                color: contrast,
+                                                color: secondary,
                                                 size: 20,
                                               ))
                                           .toList())
@@ -181,14 +181,14 @@ class ProfilePage extends StatelessWidget {
                                               : 0)
                                           .map<Widget>((e) => Icon(
                                                 DaniFont.heart_half,
-                                                color: contrast,
+                                                color: secondary,
                                                 size: 20,
                                               ))
                                           .toList())
                                       ..addAll(List(5 - _replayability.ceil())
                                           .map<Widget>((e) => Icon(
                                                 DaniFont.heart_empty,
-                                                color: contrast,
+                                                color: secondary,
                                                 size: 20,
                                               ))
                                           .toList()),
@@ -205,7 +205,7 @@ class ProfilePage extends StatelessWidget {
                       child: Text(
                         "Going To",
                         style: TextStyle(
-                            color: contrast,
+                            color: secondary,
                             fontSize: 30.0,
                             fontFamily: 'Montserrat'),
                       ),

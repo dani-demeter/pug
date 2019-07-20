@@ -103,7 +103,7 @@ class _GamesPageState extends State<GamesPage> {
                   child: Text(
                     sport.toUpperCase() + " MATCHES",
                     style: TextStyle(
-                        color: contrast,
+                        color: secondary,
                         fontSize: 30.0,
                         fontFamily: 'Montserrat'),
                   ),

@@ -36,10 +36,10 @@ class UserButton extends StatelessWidget{
                     user['username'],
                     style: TextStyle(
                         fontSize: 17.0,
-                        color: contrast,
+                        color: secondary,
                         fontFamily: 'Montserrat'),
                   ),
-                  Icon(Icons.arrow_forward_ios)
+                  Icon(Icons.arrow_forward_ios, color: secondary,)
                 ]),
             shape: new RoundedRectangleBorder(
                 borderRadius:
