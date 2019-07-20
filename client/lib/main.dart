@@ -10,6 +10,11 @@ Color darkblue = Color(0xff241d4e);
 Color lightblue = Color(0xff6ed5fe);
 Color gold = Color(0xfffece2b);
 
+Color dark = Color(0xff090821);
+Color infrared = Color(0xffEF476F);
+Color mint = Color(0xff24FBCA);
+Color bleu = Color(0xff003952);
+
 Color primary = ghostwhite;
 Color contrast = darkblue;
 Color common = lightblue;
@@ -18,11 +23,32 @@ Color highlight = gold;
 String input1Value = '';
 String input2Value = '';
 
+String myUsername = "dooni";
+
 //int pageDepth = 0;
 var pageDepth = ValueNotifier(0);
 
 var fullPage = FullPage();
 _FullPageState fullPageState;
+
+var themeStyle = ValueNotifier(0);
+
+enableDarkMode(){
+  primary = darkblue;
+  contrast = bleu;
+  highlight = mint;
+  common = infrared;
+  themeStyle.value = 1;
+}
+
+enableLightMode(){
+  primary = ghostwhite;
+  contrast = darkblue;
+  common = lightblue;
+  highlight = gold;
+  themeStyle.value = 0;
+}
+
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.

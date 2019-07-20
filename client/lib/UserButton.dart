@@ -10,7 +10,9 @@ class UserButton extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return ValueListenableBuilder(
+      valueListenable: themeStyle,
+      builder: (context, value, child) => Padding(
       padding: const EdgeInsets.fromLTRB(
           10.0, 5.0, 10.0, 0.0),
       child: Material(
@@ -45,7 +47,7 @@ class UserButton extends StatelessWidget{
           ),
         ),
       ),
-    );
+    ),);
   }
 
 }

@@ -29,38 +29,42 @@ class _HomePageState extends State<HomePage> {
   _HomePageState() {
     sportsListObjects = sportsList
         .map(
-          (word) => Padding(
-                padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
-                child: Material(
-                  color: primary,
-                  child: InkWell(
-                    splashColor: highlight,
-                    child: OutlineButton(
-                      onPressed: () {
-                        pageStack[0].add({"pageIndex": 3, "sport": word});
-                        pageCatalogue[3].setSport(word);
-                        gamesPage.setSport(word);
-                        pageDepth.value = 1;
-                        print(word);
-                      },
-                      borderSide: BorderSide(color: common, width: 2.0),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              word,
-                              style: TextStyle(
-                                  fontSize: 17.0,
-                                  color: contrast,
-                                  fontFamily: 'Montserrat'),
-                            ),
-                            Icon(Icons.arrow_forward_ios)
-                          ]),
-                      shape: new RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(10.0)),
+          (word) => ValueListenableBuilder(
+                valueListenable: themeStyle,
+                builder: (context, value, child) => Padding(
+                      padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
+                      child: Material(
+                        color: primary,
+                        child: InkWell(
+                          splashColor: highlight,
+                          child: OutlineButton(
+                            onPressed: () {
+                              pageStack[0].add({"pageIndex": 3, "sport": word});
+                              pageCatalogue[3].setSport(word);
+                              gamesPage.setSport(word);
+                              pageDepth.value = 1;
+                              print(word);
+                            },
+                            borderSide: BorderSide(color: common, width: 2.0),
+                            child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    word,
+                                    style: TextStyle(
+                                        fontSize: 17.0,
+                                        color: contrast,
+                                        fontFamily: 'Montserrat'),
+                                  ),
+                                  Icon(Icons.arrow_forward_ios)
+                                ]),
+                            shape: new RoundedRectangleBorder(
+                                borderRadius: new BorderRadius.circular(10.0)),
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
               ),
         )
         .toList();
@@ -71,10 +75,13 @@ class _HomePageState extends State<HomePage> {
             "SPORTS",
             style: TextStyle(fontSize: 30.0, fontFamily: 'Montserrat'),
           )),
-      Container(
-        height: 2.0,
-        color: highlight,
-      )
+      ValueListenableBuilder(
+        valueListenable: themeStyle,
+        builder: (context, value, child) => Container(
+              height: 2.0,
+              color: highlight,
+            ),
+      ),
     ];
 
     sportsPage = Padding(
@@ -101,7 +108,9 @@ class _HomePageState extends State<HomePage> {
         color: contrast,
         child: SafeArea(
           child: Center(
-            child: Container(
+            child: ValueListenableBuilder(
+              valueListenable: themeStyle,
+              builder: (context, value, child) => Container(
               color: primary,
 //          decoration: const BoxDecoration(
 //            gradient: LinearGradient(
@@ -112,15 +121,8 @@ class _HomePageState extends State<HomePage> {
 //              ],
 //            ),
 //          ),
-            child: sportsPage,
-//              child: ValueListenableBuilder<int>(
-//                valueListenable: pageDepth,
-////                builder: (context, value, child)=>homePageOptions[pageDepth.value],
-//                builder: (context, value, child)=>,
-//
-////                child: homePageOptions[pageDepth.value],
-//              ),
-            ),
+              child: sportsPage,
+            ),),
           ),
         ),
       ),

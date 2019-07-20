@@ -13,7 +13,6 @@ var matches = json.decode(matchesStrings);
 
 class GamesPage extends StatefulWidget {
   setSport(String selectedSport) {
-//    print(matches[0]['location']);
     sport = selectedSport;
   }
 
@@ -21,17 +20,35 @@ class GamesPage extends StatefulWidget {
   _GamesPageState createState() => _GamesPageState();
 }
 
-
-var matchElements = matches
-    .map<Widget>(
-      (match) => Match(match, true)
-    )
-    .toList();
+var matchElements = matches.map<Widget>((match) => Match(match, true)).toList();
 
 class _GamesPageState extends State<GamesPage> {
+  DateTime date = DateTime.now();
+
+  Future<Null> _selectDate(BuildContext context) async {
+    DateTime today = DateTime.now();
+    DateTime tomorrow = DateTime(today.year, today.month, today.day + 1);
+    DateTime monthFromTomorrow =
+        DateTime(tomorrow.year, tomorrow.month + 1, tomorrow.day);
+    final DateTime picked = await showDatePicker(
+      context: context,
+      initialDate: tomorrow,
+      firstDate: tomorrow,
+      lastDate: monthFromTomorrow,
+    );
+    if (picked != null) {
+      print(picked);
+      setState(() {
+        date = picked;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ValueListenableBuilder(
+      valueListenable: themeStyle,
+      builder: (context, value, child) => Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -65,7 +82,9 @@ class _GamesPageState extends State<GamesPage> {
                 ),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  _selectDate(context);
+                },
                 icon: Icon(
                   Icons.calendar_today,
                   color: common,
@@ -103,6 +122,6 @@ class _GamesPageState extends State<GamesPage> {
           ),
         ),
       ],
-    );
+    ),);
   }
 }

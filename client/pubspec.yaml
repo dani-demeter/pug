@@ -52,6 +52,7 @@ flutter:
   assets:
     - pug.jpg
     - pugprofile.png
+    - searching.gif
   #  - images/a_dot_ham.jpeg
   fonts:
         - family: Montserrat

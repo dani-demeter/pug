@@ -29,6 +29,8 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
+      valueListenable: themeStyle,
+      builder: (context, value, child) => ValueListenableBuilder(
       valueListenable: profileUsername,
       builder: (context, value, child) => Column(
             children: [
@@ -220,6 +222,6 @@ class ProfilePage extends StatelessWidget {
               ),
             ],
           ),
-    );
+    ),);
   }
 }

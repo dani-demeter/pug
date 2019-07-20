@@ -33,51 +33,62 @@ class _SearchPageState extends State<SearchPage> {
   var searchPageElt;
 
   _SearchPageState() {
-    searchPageElt = Padding(
-      padding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-      child: Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.fromLTRB(0, 10.0, 0, 10.0),
-            child: FittedBox(
-              fit: BoxFit.fitWidth,
-              child: Text(
-                "SEARCH FOR A USER",
-                style: TextStyle(fontSize: 30.0, fontFamily: 'Montserrat'),
-              ),
+    searchPageElt = ValueListenableBuilder(
+      valueListenable: themeStyle,
+      builder: (context, value, child) => Padding(
+            padding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.fromLTRB(0, 10.0, 0, 10.0),
+                  child: FittedBox(
+                    fit: BoxFit.fitWidth,
+                    child: Text(
+                      "SEARCH FOR A USER",
+                      style:
+                          TextStyle(fontSize: 30.0, fontFamily: 'Montserrat'),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(0, 0.0, 0, 15.0),
+                  child: Container(
+                    height: 2.0,
+                    color: highlight,
+                  ),
+                ),
+                TextField(
+                  controller: textFieldController,
+                  onChanged: (search) {
+                    searchQuery = search;
+                    getUsers(search);
+                  },
+                  style: TextStyle(
+                      color: common, fontFamily: 'Montserrat', fontSize: 20.0),
+                  decoration: InputDecoration(
+                      contentPadding:
+                          EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                      hintText: "Username",
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15.0))),
+                ),
+                Expanded(
+                  child: ValueListenableBuilder(
+                      valueListenable: foundUsernames,
+                      builder: (context, value, child) {
+                        if (foundUsernames.value.length == 0) {
+                          return Image.asset("searching.gif");
+                        } else {
+                          return ListView(
+                              children: foundUsers
+                                  .map<Widget>((user) => UserButton(user))
+                                  .toList());
+                        }
+                      }),
+                ),
+              ],
             ),
           ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(0, 0.0, 0, 15.0),
-            child: Container(
-              height: 2.0,
-              color: highlight,
-            ),
-          ),
-          TextField(
-            controller: textFieldController,
-            onChanged: (search) {
-              searchQuery = search;
-              getUsers(search);
-            },
-            style: TextStyle(
-                color: common, fontFamily: 'Montserrat', fontSize: 20.0),
-            decoration: InputDecoration(
-                contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                hintText: "Username",
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15.0))),
-          ),
-          Expanded(
-            child: ValueListenableBuilder(
-                valueListenable: foundUsernames,
-                builder: (context, value, child) => ListView(
-                    children: foundUsers
-                        .map<Widget>((user) => UserButton(user))
-                        .toList())),
-          ),
-        ],
-      ),
     );
   }
 
@@ -85,9 +96,12 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     textFieldController.text = searchQuery;
 //    print("rebuilt search page" + pageDepth.toString());
-    return Container(
-      color: primary,
-      child: searchPageElt,
+    return ValueListenableBuilder(
+      valueListenable: themeStyle,
+      builder: (context, value, child) => Container(
+            color: primary,
+            child: searchPageElt,
+          ),
     );
   }
 }

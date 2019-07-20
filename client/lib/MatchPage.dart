@@ -47,7 +47,9 @@ class MatchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ValueListenableBuilder(
+      valueListenable: themeStyle,
+      builder: (context, value, child) => Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -134,6 +136,6 @@ class MatchPage extends StatelessWidget {
           ),
         ),
       ],
-    );
+    ),);
   }
 }
