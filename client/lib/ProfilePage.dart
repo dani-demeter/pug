@@ -44,6 +44,7 @@ class ProfilePage extends StatelessWidget {
                   children: [
                     FlatButton(
                       onPressed: () {
+                        pageStack[appCurrentIndex].removeLast();
                         pageDepth.value--;
                       },
                       child: Row(

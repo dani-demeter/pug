@@ -48,80 +48,84 @@ class _GamesPageState extends State<GamesPage> {
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
       valueListenable: themeStyle,
-      builder: (context, value, child) => Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          //for top bar color
-          width: MediaQuery.of(context).size.width,
-          alignment: AlignmentDirectional.topCenter,
-          color: contrast,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              FlatButton(
-                onPressed: () {
-                  pageStack[appCurrentIndex].removeLast();
-                  pageDepth.value--;
-                },
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.arrow_back_ios,
-                      color: common,
-                    ),
-                    Text(
-                      "All Sports",
-                      style: TextStyle(
-                          color: common,
-                          fontFamily: 'Montserrat',
-                          fontSize: 20.0),
-                    ),
-                  ],
-                ),
-              ),
-              IconButton(
-                onPressed: () {
-                  _selectDate(context);
-                },
-                icon: Icon(
-                  Icons.calendar_today,
-                  color: common,
-                ),
-              ),
-            ],
-          ),
-        ),
-        Center(
-          child: Padding(
-            padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 0.0),
-            child: Column(
+      builder: (context, value, child) => Scaffold(
+            backgroundColor: primary,
+            body: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                FittedBox(
-                  fit: BoxFit.fitWidth,
-                  child: Text(
-                    sport.toUpperCase() + " MATCHES",
-                    style: TextStyle(
-                        color: secondary,
-                        fontSize: 30.0,
-                        fontFamily: 'Montserrat'),
+                Container(
+                  //for top bar color
+                  width: MediaQuery.of(context).size.width,
+                  alignment: AlignmentDirectional.topCenter,
+                  color: contrast,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      FlatButton(
+                        onPressed: () {
+                          pageStack[appCurrentIndex].removeLast();
+                          pageDepth.value--;
+                        },
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.arrow_back_ios,
+                              color: common,
+                            ),
+                            Text(
+                              "All Sports",
+                              style: TextStyle(
+                                  color: common,
+                                  fontFamily: 'Montserrat',
+                                  fontSize: 20.0),
+                            ),
+                          ],
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          _selectDate(context);
+                        },
+                        icon: Icon(
+                          Icons.calendar_today,
+                          color: common,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                Container(
-                  height: 2.0,
-                  color: highlight,
-                )
+                Center(
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 0.0),
+                    child: Column(
+                      children: [
+                        FittedBox(
+                          fit: BoxFit.fitWidth,
+                          child: Text(
+                            sport.toUpperCase() + " MATCHES",
+                            style: TextStyle(
+                                color: secondary,
+                                fontSize: 30.0,
+                                fontFamily: 'Montserrat'),
+                          ),
+                        ),
+                        Container(
+                          height: 2.0,
+                          color: highlight,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: ListView(
+                    children: matchElements,
+                  ),
+                ),
               ],
             ),
           ),
-        ),
-        Expanded(
-          child: ListView(
-            children: matchElements,
-          ),
-        ),
-      ],
-    ),);
+    );
   }
 }

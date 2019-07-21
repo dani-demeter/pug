@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'FABBottomAppBar.dart';
 import 'main.dart';
 import 'HomePage.dart';
 import 'SearchPage.dart';
@@ -7,6 +8,7 @@ import 'GamesPage.dart';
 import 'ProfilePage.dart';
 import 'MatchPage.dart';
 import 'UserPage.dart';
+import 'MessagesPage.dart';
 
 int appCurrentIndex = 0;
 
@@ -18,6 +20,7 @@ GamesPage gamesPage = GamesPage();
 ProfilePage profilePage = ProfilePage();
 MatchPage matchPage = MatchPage();
 UserPage userPage = UserPage();
+MessagesPage messagesPage = MessagesPage();
 //final appPageOptions = [
 //  homePage,
 //  searchPage,
@@ -30,6 +33,7 @@ List pageCatalogue = [
   gamesPage,
   profilePage,
   matchPage,
+  messagesPage,
 ];
 // 0 = homePage
 // 1 = searchPage
@@ -37,6 +41,7 @@ List pageCatalogue = [
 // 3 = gamesPage
 // 4 = profilePage
 // 5 = matchPage
+// 6 = messagesPage
 
 List<List<dynamic>> pageStack = [
   [
@@ -44,6 +49,9 @@ List<List<dynamic>> pageStack = [
   ],
   [
     {"pageIndex": 1}
+  ],
+  [
+    {"pageIndex": 6}
   ],
   [
     {"pageIndex": 2}
@@ -72,6 +80,7 @@ class _AppPageState extends State<AppPage> {
 
   @override
   Widget build(BuildContext context) {
+    final bool showFab = MediaQuery.of(context).viewInsets.bottom == 0.0;
     return WillPopScope(
       onWillPop: () async {
         print("was " + pageStack.toString());
@@ -96,12 +105,15 @@ class _AppPageState extends State<AppPage> {
       child: ValueListenableBuilder(
         valueListenable: themeStyle,
         builder: (context, value, child) => Scaffold(
+              resizeToAvoidBottomPadding: false,
+              resizeToAvoidBottomInset: false,
+              backgroundColor: primary,
               body: Container(
                 color: contrast,
                 child: SafeArea(
                   child: Container(
                     color: primary,
-                    padding: EdgeInsets.fromLTRB(0, 0, 0, 15.0),
+//                    padding: EdgeInsets.fromLTRB(0, 0, 0, 15.0),
                     child: ValueListenableBuilder(
                         valueListenable: pageDepth,
                         builder: (context, value, child) => pageCatalogue[
@@ -110,10 +122,9 @@ class _AppPageState extends State<AppPage> {
                   ),
                 ),
               ),
-//        body: pageCatalogue[pageStack[appCurrentIndex][pageDepth.value]
-//            ['pageIndex']],
-              bottomNavigationBar: BottomNavigationBar(
-                onTap: (int newtab) {
+//              resizeToAvoidBottomPadding: false,
+              bottomNavigationBar: FABBottomAppBar(
+                onTabSelected: (int newtab) {
                   setState(() {
                     changedTabs = true;
                     appPrevIndex = appCurrentIndex;
@@ -122,26 +133,41 @@ class _AppPageState extends State<AppPage> {
                     setupNewPage();
                   });
                 },
+                centerItemText: "Create",
+                notchedShape: CircularNotchedRectangle(),
                 backgroundColor: contrast,
-                selectedItemColor: highlight,
-                unselectedItemColor: common,
-                type: BottomNavigationBarType.fixed,
-                currentIndex: appCurrentIndex,
+                color: common,
+                selectedColor: highlight,
                 items: [
-                  BottomNavigationBarItem(
-                    icon: new Icon(Icons.home),
-                    title: new Text('Home'),
+                  FABBottomAppBarItem(
+                    iconData: Icons.home,
+                    text: "Home",
                   ),
-                  BottomNavigationBarItem(
-                    icon: new Icon(Icons.search),
-                    title: new Text('Search'),
+                  FABBottomAppBarItem(
+                    iconData: Icons.search,
+                    text: "Search",
                   ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.person),
-                    title: Text('Profile'),
-                  )
+                  FABBottomAppBarItem(
+                    iconData: Icons.message,
+                    text: "Messages",
+                  ),
+                  FABBottomAppBarItem(
+                    iconData: Icons.person,
+                    text: "Profile",
+                  ),
                 ],
               ),
+              floatingActionButton: FloatingActionButton(
+                onPressed: () {},
+                child: Icon(
+                  Icons.add,
+                  color: primary,
+                  size: 30,
+                ),
+                backgroundColor: common,
+              ),
+              floatingActionButtonLocation:
+                  FloatingActionButtonLocation.centerDocked,
             ),
       ),
     );

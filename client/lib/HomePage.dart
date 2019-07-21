@@ -57,7 +57,10 @@ class _HomePageState extends State<HomePage> {
                                         color: secondary,
                                         fontFamily: 'Montserrat'),
                                   ),
-                                  Icon(Icons.arrow_forward_ios, color: secondary,)
+                                  Icon(
+                                    Icons.arrow_forward_ios,
+                                    color: secondary,
+                                  )
                                 ]),
                             shape: new RoundedRectangleBorder(
                                 borderRadius: new BorderRadius.circular(10.0)),
@@ -73,7 +76,8 @@ class _HomePageState extends State<HomePage> {
           padding: EdgeInsets.fromLTRB(0, 10.0, 0, 10.0),
           child: Text(
             "SPORTS",
-            style: TextStyle(fontSize: 30.0, fontFamily: 'Montserrat', color: secondary),
+            style: TextStyle(
+                fontSize: 30.0, fontFamily: 'Montserrat', color: secondary),
           )),
       ValueListenableBuilder(
         valueListenable: themeStyle,
@@ -111,7 +115,7 @@ class _HomePageState extends State<HomePage> {
             child: ValueListenableBuilder(
               valueListenable: themeStyle,
               builder: (context, value, child) => Container(
-              color: primary,
+                    color: primary,
 //          decoration: const BoxDecoration(
 //            gradient: LinearGradient(
 //              colors: <Color>[
@@ -121,11 +125,13 @@ class _HomePageState extends State<HomePage> {
 //              ],
 //            ),
 //          ),
-              child: sportsPage,
-            ),),
+                    child: sportsPage,
+                  ),
+            ),
           ),
         ),
       ),
+
     );
   }
 }

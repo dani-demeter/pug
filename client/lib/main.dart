@@ -38,8 +38,8 @@ enableDarkMode(){
   primary = darkblue;
   secondary = ghostwhite;
   contrast = lightercadet;
-  highlight = mint;
-  common = infrared;
+  highlight = gold;
+  common = lightblue;
   themeStyle.value = 1;
 }
 

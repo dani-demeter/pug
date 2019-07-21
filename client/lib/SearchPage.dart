@@ -36,7 +36,7 @@ class _SearchPageState extends State<SearchPage> {
     searchPageElt = ValueListenableBuilder(
       valueListenable: themeStyle,
       builder: (context, value, child) => Padding(
-            padding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+            padding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 0),
             child: Column(
               children: [
                 Padding(
