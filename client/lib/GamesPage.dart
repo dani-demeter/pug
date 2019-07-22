@@ -8,7 +8,7 @@ import 'Match.dart';
 
 String sport = "none";
 var matchesStrings =
-    """[{"location": "13 Happy Face Ave", "time": "18:45", "date": "9/14", "players": 6, "range": "5-10", "id": 12345}, {"location": "500 El Camino Real", "time": "18:45", "date": "11/3", "players": 6, "range": "5-10", "id": 13456}, {"location": "500 El Camino Real", "time": "18:45", "date": "11/3", "players": 6, "range": "5-10", "id": 23456}, {"location": "500 El Camino Real", "time": "18:45", "date": "11/3", "players": 6, "range": "5-10", "id": 34567}, {"location": "500 El Camino Real", "time": "18:45", "date": "11/3", "players": 6, "range": "5-10", "id": 45678}, {"location": "500 El Camino Real", "time": "18:45", "date": "11/3", "players": 6, "range": "5-10", "id": 56789}, {"location": "500 El Camino Real", "time": "18:45", "date": "11/3", "players": 6, "range": "5-10", "id": 67890}]""";
+    """[{"location": "13 Happy Face Ave", "time": "18:45", "date": "9/14", "players": 6, "range": "5-10", "cost": 0,"id": 12345}, {"location": "500 El Camino Real", "time": "18:45", "date": "11/3", "players": 6, "range": "5-10", "cost": 3.25, "id": 13456}, {"location": "500 El Camino Real", "time": "18:45", "date": "11/3", "players": 6, "range": "5-10", "cost": 0, "id": 23456}, {"location": "500 El Camino Real", "time": "18:45", "date": "11/3", "players": 6, "range": "5-10", "cost": 5, "id": 34567}, {"location": "500 El Camino Real", "time": "18:45", "date": "11/3", "players": 6, "range": "5-10", "cost": 0, "id": 45678}, {"location": "500 El Camino Real", "time": "18:45", "date": "11/3", "players": 6, "range": "5-10", "cost": 2.75, "id": 56789}, {"location": "500 El Camino Real", "time": "18:45", "date": "11/3", "players": 6, "range": "5-10", "cost": 0, "id": 67890}]""";
 var matches = json.decode(matchesStrings);
 
 class GamesPage extends StatefulWidget {
@@ -23,7 +23,7 @@ class GamesPage extends StatefulWidget {
 var matchElements = matches.map<Widget>((match) => Match(match, true)).toList();
 
 class _GamesPageState extends State<GamesPage> {
-  DateTime date = DateTime.now();
+  DateTime date = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day+1);
 
   Future<Null> _selectDate(BuildContext context) async {
     DateTime today = DateTime.now();
@@ -83,13 +83,37 @@ class _GamesPageState extends State<GamesPage> {
                           ],
                         ),
                       ),
-                      IconButton(
-                        onPressed: () {
-                          _selectDate(context);
-                        },
-                        icon: Icon(
-                          Icons.calendar_today,
-                          color: common,
+                      Material(
+                        color: common,
+                        borderRadius: BorderRadius.circular(15),
+                        child: InkWell(
+                          onTap: () {
+                            _selectDate(context);
+                          },
+                          splashColor: contrast,
+                          child: Container(
+                            padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
+                            child: Row(
+                              children: [
+                                Text(
+                                  date.month.toString() +
+                                      "/" +
+                                      date.day.toString(),
+                                  style: TextStyle(
+                                      color: primary,
+                                      fontSize: 20,
+                                      fontFamily: 'Montserrat'),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(left: 5),
+                                  child: Icon(
+                                    Icons.calendar_today,
+                                    color: primary,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                       ),
                     ],

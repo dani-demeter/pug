@@ -24,11 +24,7 @@ class MessagesPage extends StatelessWidget {
                   children: [
                     IconButton(
                       onPressed: () {
-                        if (themeStyle.value == 0) {
-                          enableDarkMode();
-                        } else {
-                          enableLightMode();
-                        }
+
                       },
                       icon: Icon(
                         Icons.add_comment,

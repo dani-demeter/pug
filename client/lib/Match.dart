@@ -21,7 +21,7 @@ class Match extends StatelessWidget {
         return Container(
           height: 100,
           decoration: BoxDecoration(
-            border: Border.all(width: 1, color: common),
+            border: Border.all(width: 2, color: common),
             borderRadius: BorderRadius.all(Radius.circular(5.0)),
           ),
           child: Row(
@@ -57,12 +57,12 @@ class Match extends StatelessWidget {
                                 child: Container(
                               child: Row(children: [
                                 Icon(
-                                  Icons.calendar_today,
+                                  Icons.monetization_on,
                                   color: common,
                                 ),
                                 Padding(
                                     padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                                    child: Text(match['date'].toString(),
+                                    child: Text(match['cost']==0?"Free":'\$'+match['cost'].toString(),
                                         style: infoStyle)),
                               ]),
                             )),

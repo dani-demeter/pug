@@ -126,11 +126,19 @@ class _AppPageState extends State<AppPage> {
               bottomNavigationBar: FABBottomAppBar(
                 onTabSelected: (int newtab) {
                   setState(() {
-                    changedTabs = true;
-                    appPrevIndex = appCurrentIndex;
-                    appCurrentIndex = newtab;
-                    pageDepth.value = pageStack[newtab].length - 1;
-                    setupNewPage();
+                    if(newtab!=appCurrentIndex){
+                      changedTabs = true;
+                      appPrevIndex = appCurrentIndex;
+                      appCurrentIndex = newtab;
+                      pageDepth.value = pageStack[newtab].length - 1;
+                      setupNewPage();
+                    }else{
+                      pageDepth.value = 0;
+                      int l = pageStack[appCurrentIndex].length-1;
+                      for(var i = 0; i<l; i++){
+                        pageStack[appCurrentIndex].removeLast();
+                      }
+                    }
                   });
                 },
                 centerItemText: "Create",
