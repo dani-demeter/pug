@@ -73,12 +73,13 @@ class _HomePageState extends State<HomePage> {
         .toList();
     sportsListTitle = [
       Padding(
-          padding: EdgeInsets.fromLTRB(0, 10.0, 0, 10.0),
-          child: Text(
-            "SPORTS",
-            style: TextStyle(
-                fontSize: 30.0, fontFamily: 'Montserrat', color: secondary),
-          )),
+        padding: EdgeInsets.fromLTRB(0, 10.0, 0, 10.0),
+        child: Text(
+          "SPORTS",
+          style: TextStyle(
+              fontSize: 30.0, fontFamily: 'Montserrat', color: secondary),
+        ),
+      ),
       ValueListenableBuilder(
         valueListenable: themeStyle,
         builder: (context, value, child) => Container(
@@ -131,7 +132,6 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-
     );
   }
 }

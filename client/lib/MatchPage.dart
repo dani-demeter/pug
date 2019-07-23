@@ -50,92 +50,100 @@ class MatchPage extends StatelessWidget {
     return ValueListenableBuilder(
       valueListenable: themeStyle,
       builder: (context, value, child) => Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          //for top bar color
-          width: MediaQuery.of(context).size.width,
-          alignment: AlignmentDirectional.topCenter,
-          color: contrast,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FlatButton(
-                onPressed: () {
-                  pageStack[appCurrentIndex].removeLast();
-                  pageDepth.value--;
-                },
+              Container(
+                //for top bar color
+                width: MediaQuery.of(context).size.width,
+                alignment: AlignmentDirectional.topCenter,
+                color: contrast,
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Icon(
-                      Icons.arrow_back_ios,
-                      color: common,
-                    ),
-                    Text(
-                      "Back",
-                      style: TextStyle(
-                          color: common,
-                          fontFamily: 'Montserrat',
-                          fontSize: 20.0),
+                    FlatButton(
+                      onPressed: () {
+                        pageStack[appCurrentIndex].removeLast();
+                        pageDepth.value--;
+                      },
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.arrow_back_ios,
+                            color: common,
+                          ),
+                          Text(
+                            "Back",
+                            style: TextStyle(
+                                color: common,
+                                fontFamily: 'Montserrat',
+                                fontSize: 20.0),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  child: ListView(
+                      children: [
+                    Match(fullmatch, false),
+                    Container(
+                      padding: EdgeInsets.fromLTRB(30, 0, 30, 10),
+                      child: RaisedButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0)),
+                        child: Padding(
+                          padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                          child: Text(
+                            "Count me in!",
+                            style: TextStyle(
+                                color: contrast,
+                                fontFamily: 'Montserrat',
+                                fontSize: 20),
+                          ),
+                        ),
+                        onPressed: () {
+                          openMap(matchLocation);
+                        },
+                        padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
+                        color: highlight,
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.fromLTRB(20.0, 0, 20.0, 5.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "ATTENDING",
+                            style: TextStyle(
+                                color: secondary,
+                                fontSize: 20,
+                                fontFamily: 'Montserrat'),
+                          ),
+                          Container(
+                            height: 2.0,
+                            color: highlight,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ]..addAll(
+                          players.map(
+                            (player) => Container(
+                              padding: EdgeInsets.fromLTRB(
+                                  20, 0, 20, 0),
+                                  child: UserButton(player),
+                                ),
+                          ),
+                        )),
                 ),
               ),
             ],
           ),
-        ),
-        Expanded(
-          child: Container(
-            child: ListView(
-                children: [
-              Match(fullmatch, false),
-              Container(
-                padding: EdgeInsets.fromLTRB(30, 0, 30, 10),
-                child: RaisedButton(
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                    child: Text(
-                      "Count me in!",
-                      style: TextStyle(
-                          color: secondary,
-                          fontFamily: 'Montserrat',
-                          fontSize: 20),
-                    ),
-                  ),
-                  onPressed: () {
-                    openMap(matchLocation);
-                  },
-                  padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
-                  color: highlight,
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.fromLTRB(20.0, 0, 20.0, 5.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "ATTENDING",
-                      style: TextStyle(
-                          color: secondary,
-                          fontSize: 20,
-                          fontFamily: 'Montserrat'),
-                    ),
-                    Container(
-                      height: 2.0,
-                      color: highlight,
-                    ),
-                  ],
-                ),
-              ),
-            ]..addAll(
-                    players.map((player) => UserButton(player)),
-                  )),
-          ),
-        ),
-      ],
-    ),);
+    );
   }
 }

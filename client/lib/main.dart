@@ -9,16 +9,12 @@ Color ghostwhite = Color(0xffF9FDFF);
 Color darkblue = Color(0xff241d4e);
 Color lightblue = Color(0xff6ed5fe);
 Color gold = Color(0xfffece2b);
-
-Color dark = Color(0xff090821);
-Color infrared = Color(0xffEF476F);
-Color mint = Color(0xff24FBCA);
 Color lightercadet = Color(0xff4F549B);
-
+Color newblue = Color(0xff35E7FF);
 Color primary = ghostwhite;
 Color secondary = darkblue;
 Color contrast = darkblue;
-Color common = lightblue;
+Color common = newblue;
 Color highlight = gold;
 
 String input1Value = '';
@@ -39,7 +35,7 @@ enableDarkMode(){
   secondary = ghostwhite;
   contrast = lightercadet;
   highlight = gold;
-  common = lightblue;
+  common = newblue;
   themeStyle.value = 1;
 }
 
@@ -47,7 +43,7 @@ enableLightMode(){
   primary = ghostwhite;
   secondary = darkblue;
   contrast = darkblue;
-  common = lightblue;
+  common = newblue;
   highlight = gold;
   themeStyle.value = 0;
 }

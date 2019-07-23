@@ -9,6 +9,7 @@ import 'ProfilePage.dart';
 import 'MatchPage.dart';
 import 'UserPage.dart';
 import 'MessagesPage.dart';
+import 'SettingsPage.dart';
 
 int appCurrentIndex = 0;
 
@@ -21,6 +22,7 @@ ProfilePage profilePage = ProfilePage();
 MatchPage matchPage = MatchPage();
 UserPage userPage = UserPage();
 MessagesPage messagesPage = MessagesPage();
+SettingsPage settingsPage = SettingsPage();
 //final appPageOptions = [
 //  homePage,
 //  searchPage,
@@ -34,6 +36,7 @@ List pageCatalogue = [
   profilePage,
   matchPage,
   messagesPage,
+  settingsPage,
 ];
 // 0 = homePage
 // 1 = searchPage
@@ -42,6 +45,7 @@ List pageCatalogue = [
 // 4 = profilePage
 // 5 = matchPage
 // 6 = messagesPage
+// 7 = settingsPage
 
 List<List<dynamic>> pageStack = [
   [
