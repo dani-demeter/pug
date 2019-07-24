@@ -3,31 +3,6 @@ import 'package:flutter/material.dart';
 import 'main.dart';
 
 class LoginPage extends StatelessWidget {
-  static TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
-  TextField emailField = TextField(
-    onChanged: (String val) {
-      input1Value = val;
-    },
-    obscureText: false,
-    style: style,
-    decoration: InputDecoration(
-        contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-        hintText: "Username",
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0))),
-  );
-  TextField passwordField = TextField(
-    obscureText: true,
-    onChanged: (String val) {
-      input2Value = val;
-    },
-    style: style,
-//    textAlign: TextAlign.center,
-    decoration: InputDecoration(
-        contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-        hintText: "Password",
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0))),
-  );
-
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
@@ -37,12 +12,10 @@ class LoginPage extends StatelessWidget {
               child: Container(
                 color: primary,
                 child: Padding(
-//            padding: const EdgeInsets.all(36.0),
                   padding: const EdgeInsets.fromLTRB(36.0, 10.0, 36.0, 10.0),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
+                    children: [
                       SizedBox(
                         height: 140.0,
                         child: Image.asset(
@@ -51,9 +24,61 @@ class LoginPage extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 30.0),
-                      emailField,
+                      TextField(
+                        onChanged: (String val) {
+                          input1Value = val;
+                        },
+                        obscureText: false,
+                        style: TextStyle(
+                            color: secondary,
+                            fontFamily: 'Montserrat',
+                            fontSize: 20),
+                        decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                            borderSide: BorderSide(color: secondary),
+                          ),
+                          contentPadding:
+                              EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                          hintText: "Username",
+                          hintStyle: TextStyle(
+                              color: common,
+                              fontFamily: 'Montserrat',
+                              fontSize: 20),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                            borderSide: BorderSide(color: highlight),
+                          ),
+                        ),
+                      ),
                       SizedBox(height: 10.0),
-                      passwordField,
+                      TextField(
+                        obscureText: true,
+                        onChanged: (String val) {
+                          input2Value = val;
+                        },
+                        style: TextStyle(
+                            color: secondary,
+                            fontFamily: 'Montserrat',
+                            fontSize: 20),
+                        decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                            borderSide: BorderSide(color: secondary),
+                          ),
+                          contentPadding:
+                              EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                          hintText: "Password",
+                          hintStyle: TextStyle(
+                              color: common,
+                              fontFamily: 'Montserrat',
+                              fontSize: 20),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                            borderSide: BorderSide(color: highlight),
+                          ),
+                        ),
+                      ),
                       SizedBox(
                         height: 15.0,
                       ),

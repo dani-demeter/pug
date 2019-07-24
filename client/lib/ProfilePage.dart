@@ -37,7 +37,7 @@ class ProfilePage extends StatelessWidget {
               Container(
                 //for top bar color
                 width: MediaQuery.of(context).size.width,
-                alignment: AlignmentDirectional.topCenter,
+                height: 50,
                 color: contrast,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

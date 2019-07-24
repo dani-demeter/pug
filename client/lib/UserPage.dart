@@ -274,36 +274,6 @@ class UserPage extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(30.0, 5.0, 30.0, 0.0),
-                child: Material(
-                  color: primary,
-                  child: InkWell(
-                    splashColor: highlight,
-                    child: OutlineButton(
-                      onPressed: () {},
-                      borderSide: BorderSide(color: common, width: 2.0),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Past Games",
-                              style: TextStyle(
-                                  fontSize: 17.0,
-                                  color: secondary,
-                                  fontFamily: 'Montserrat'),
-                            ),
-                            Icon(
-                              Icons.arrow_forward_ios,
-                              color: secondary,
-                            )
-                          ]),
-                      shape: new RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(10.0)),
-                    ),
-                  ),
-                ),
-              ),
             ],
           ),
     ); //top nav bar

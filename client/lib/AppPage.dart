@@ -23,11 +23,6 @@ MatchPage matchPage = MatchPage();
 UserPage userPage = UserPage();
 MessagesPage messagesPage = MessagesPage();
 SettingsPage settingsPage = SettingsPage();
-//final appPageOptions = [
-//  homePage,
-//  searchPage,
-//  Container(color: Colors.blue),
-//];
 List pageCatalogue = [
   homePage,
   searchPage,
@@ -130,16 +125,16 @@ class _AppPageState extends State<AppPage> {
               bottomNavigationBar: FABBottomAppBar(
                 onTabSelected: (int newtab) {
                   setState(() {
-                    if(newtab!=appCurrentIndex){
+                    if (newtab != appCurrentIndex) {
                       changedTabs = true;
                       appPrevIndex = appCurrentIndex;
                       appCurrentIndex = newtab;
                       pageDepth.value = pageStack[newtab].length - 1;
                       setupNewPage();
-                    }else{
+                    } else {
                       pageDepth.value = 0;
-                      int l = pageStack[appCurrentIndex].length-1;
-                      for(var i = 0; i<l; i++){
+                      int l = pageStack[appCurrentIndex].length - 1;
+                      for (var i = 0; i < l; i++) {
                         pageStack[appCurrentIndex].removeLast();
                       }
                     }
@@ -170,7 +165,9 @@ class _AppPageState extends State<AppPage> {
                 ],
               ),
               floatingActionButton: FloatingActionButton(
-                onPressed: () {},
+                onPressed: () {
+                  fullPageState.goToCreateMatch();
+                },
                 child: Icon(
                   Icons.add,
                   color: primary,

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'main.dart';
 import 'AppPage.dart';
-
-int searchRadius = 5;
 
 class SettingsPage extends StatefulWidget {
   _SettingsPageState createState() => _SettingsPageState();
@@ -19,7 +18,7 @@ class _SettingsPageState extends State<SettingsPage> {
               Container(
                 //for top bar color
                 width: MediaQuery.of(context).size.width,
-                alignment: AlignmentDirectional.topCenter,
+                height: 50,
                 color: contrast,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -116,6 +115,9 @@ class _SettingsPageState extends State<SettingsPage> {
                               searchRadius = val.toInt();
                             });
                           },
+                          onChangeEnd: (double val) {
+                            setSearchRadiusPref(val.toInt());
+                          },
                           value: searchRadius.toDouble(),
                           min: 1,
                           max: 10,
@@ -126,8 +128,9 @@ class _SettingsPageState extends State<SettingsPage> {
                       ],
                     ),
                     RaisedButton(
-                      onPressed: (){},
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                      onPressed: () {},
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30)),
                       color: highlight,
                       child: Padding(
                         padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
